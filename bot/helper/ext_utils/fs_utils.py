@@ -5,12 +5,13 @@ from shutil import rmtree
 from PIL import Image
 from magic import Magic
 from subprocess import run as srun, check_output
+from shutil import rmtree, disk_usage
 from time import time
 from math import ceil
 from re import split as re_split, I
 
 from .exceptions import NotSupportedExtractionArchive
-from bot import aria2, app, LOGGER, DOWNLOAD_DIR, get_client, TG_SPLIT_SIZE, EQUAL_SPLITS
+from bot import aria2, app, LOGGER, DOWNLOAD_DIR, get_client, TG_SPLIT_SIZE, EQUAL_SPLITS, STORAGE_THRESHOLD
 
 VIDEO_SUFFIXES = ("M4V", "MP4", "MOV", "FLV", "WMV", "3GP", "MPG", "WEBM", "MKV", "AVI")
 
@@ -164,3 +165,17 @@ def get_media_info(path):
         artist = None
 
     return duration, artist, title
+
+def check_storage_threshold(size: int, arch=False, alloc=False):
+    if not alloc:
+        if not arch:
+            if disk_usage(DOWNLOAD_DIR).free - size < STORAGE_THRESHOLD * 1024**3:
+                return False
+        elif disk_usage(DOWNLOAD_DIR).free - (size * 2) < STORAGE_THRESHOLD * 1024**3:
+            return False
+    elif not arch:
+        if disk_usage(DOWNLOAD_DIR).free < STORAGE_THRESHOLD * 1024**3:
+            return False
+    elif disk_usage(DOWNLOAD_DIR).free - size < STORAGE_THRESHOLD * 1024**3:
+        return False
+    return True
