@@ -243,6 +243,27 @@ try:
 except:
     SEARCH_LIMIT = 0
 try:
+    TORRENT_DIRECT_LIMIT = getConfig('TORRENT_DIRECT_LIMIT')
+    if len(TORRENT_DIRECT_LIMIT) == 0:
+        raise KeyError
+    TORRENT_DIRECT_LIMIT = float(TORRENT_DIRECT_LIMIT)
+except:
+    TORRENT_DIRECT_LIMIT = None
+try:
+    CLONE_LIMIT = getConfig('CLONE_LIMIT')
+    if len(CLONE_LIMIT) == 0:
+        raise KeyError
+    CLONE_LIMIT = float(CLONE_LIMIT)
+except:
+    CLONE_LIMIT = None
+try:
+    MEGA_LIMIT = getConfig('MEGA_LIMIT')
+    if len(MEGA_LIMIT) == 0:
+        raise KeyError
+    MEGA_LIMIT = float(MEGA_LIMIT)
+except:
+    MEGA_LIMIT = None
+try:
     RSS_COMMAND = getConfig('RSS_COMMAND')
     if len(RSS_COMMAND) == 0:
         raise KeyError
