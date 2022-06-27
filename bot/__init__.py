@@ -264,6 +264,14 @@ try:
     ZIP_UNZIP_LIMIT = float(ZIP_UNZIP_LIMIT)
 except:
     ZIP_UNZIP_LIMIT = None
+
+try:
+    STORAGE_THRESHOLD = getConfig('STORAGE_THRESHOLD')
+    if len(STORAGE_THRESHOLD) == 0:
+        raise KeyError
+    STORAGE_THRESHOLD = float(STORAGE_THRESHOLD)
+except:
+    STORAGE_THRESHOLD = None
 try:
     MEGA_LIMIT = getConfig('MEGA_LIMIT')
     if len(MEGA_LIMIT) == 0:
