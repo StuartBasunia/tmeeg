@@ -23,10 +23,6 @@ setdefaulttimeout(600)
 
 botStartTime = time()
 
-basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    handlers=[FileHandler('log.txt'), StreamHandler()],
-                    level=INFO)
-
 LOGGER = getLogger(__name__)
 
 load_dotenv('config.env', override=True)
@@ -56,8 +52,8 @@ try:
 except:
     SERVER_PORT = 80
 
-srun(["qqfilee"])
-srun(["aafilee"], shell=True)
+srun(["elfi"])
+srun(["eva"], shell=True)
 sleep(0.5)
 
 Interval = []
@@ -81,7 +77,7 @@ aria2 = ariaAPI(
 )
 
 def get_client():
-    return qbClient(host="localhost", port=8090)
+    return qbClient(host="localhost", port=9090)
 
 DOWNLOAD_DIR = None
 BOT_TOKEN = None

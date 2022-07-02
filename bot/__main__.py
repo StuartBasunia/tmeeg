@@ -77,8 +77,7 @@ def restart(update, context):
     if Interval:
         Interval[0].cancel()
     clean_all()
-    srun(["pkill", "-f", "aafilee|qqfilee"])
-    srun(["python3", "update.py"])
+    srun(["pkill", "-f", "eva|elfi"])
     with open(".restartmsg", "w") as f:
         f.truncate(0)
         f.write(f"{restart_message.chat.id}\n{restart_message.message_id}\n")
